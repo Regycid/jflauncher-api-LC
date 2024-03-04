@@ -1,5 +1,9 @@
 # JFLauncher api
 
+<p align="center">
+  <img src=https://livecampus.fr/wp-content/uploads/2020/09/logo_transparent_background.png width="300" title="hover text">
+</p>
+
 ## Description
 
 The JFLauncher api are used to share versions of the modpack Jimmu's Factory on all the diffrent channel (alpha,beta, release,...)
