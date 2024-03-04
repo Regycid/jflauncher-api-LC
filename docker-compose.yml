@@ -1,17 +1,51 @@
-version: '3.3'
 services:
-  web:
+  api:
     container_name: "jfl-api"
-    build:
-      context: .
-      dockerfile: dockerfile
+    image: dragonir/jfl-api:v1.0.2
     environment:
       - "TZ=Europe/Paris"
-    restart: on-failure
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:5000/health"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
     ports:
       - "5000:5000"
     volumes:
-      - ./test/repo:/root/repo
+      - repo:/app/repo
+
+  proxy:
+    image: 'jc21/nginx-proxy-manager:2'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+      - '81:81'
+    healthcheck:
+      test: "curl --fail http://localhost:81 || exit 1"
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - proxy-data:/data
+      - proxy-certs:/etc/letsencrypt
+
+  portainer:
+    image: portainer/portainer-ce:linux-amd64
+    restart: always
+    container_name: portainer
+    ports:
+      - 9000:9000
+      - 9443:9443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
 
 volumes:
   repo:
+  portainer_data:
+  proxy-data:
+  proxy-certs:
