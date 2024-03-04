@@ -1,20 +1,21 @@
 import express from 'express';
 import dotenv from 'dotenv';
-
-// import routes
 import channelRoutes from './routes/channel';
 import addChannelRoutes from './routes/addChannel';
 import healthRoutes from './routes/health';
 
-// load environment variables
-dotenv.config()
+// Import routes
+
+// Load environment variables
+dotenv.config();
+
 const app = express();
 
 app.use(express.json());
 
-// use routes
-app.use('/channel', channelRoutes);
-app.use('/addchannel', addChannelRoutes);
-app.use('/health', healthRoutes);
+// Use routes
+app.use('/channel', channelRoutes); // Route for handling channel related requests
+app.use('/addchannel', addChannelRoutes); // Route for handling add channel requests
+app.use('/health', healthRoutes); // Route for handling health check requests
 
 export default app;
