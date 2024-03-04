@@ -1,9 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import fs from 'fs';
-import path from 'path';
 import multer from 'multer';
-
 import { createChannel, createVersion } from '../models/channel';
 
 const storage = multer.diskStorage({ // Initialise le stockage des fichiers
@@ -22,21 +20,21 @@ const router = express.Router();
 
 router.route('/createchannel')
     .post(upload.array('files', 1), (req, res) => {
-        if (req.headers['token'] === process.env.TOKEN) {
-            res.json(createChannel(req.body.name));
+        if (req.headers['token'] === process.env.TOKEN) { // Vérifie le jeton d'authentification
+            res.json(createChannel(req.body.name)); // Appelle la fonction createChannel avec le nom du canal
         }
         else {
-            res.status(403).send('Forbidden');
+            res.status(403).send('Forbidden'); // Renvoie une erreur 403 si le jeton est incorrect
         }
     })
 
 router.route('/createversion')
     .post(upload.array('files', 1), (req, res) => {
-        if (req.headers['token'] === process.env.TOKEN) {
-            res.json(createVersion(req.body.channel, req.body.name, req.body.changelog, req.files));
+        if (req.headers['token'] === process.env.TOKEN) { // Vérifie le jeton d'authentification
+            res.json(createVersion(req.body.channel, req.body.name, req.body.changelog, req.files)); // Appelle la fonction createVersion avec les paramètres requis
         }
         else {
-            res.status(403).send('Forbidden');
+            res.status(403).send('Forbidden'); // Renvoie une erreur 403 si le jeton est incorrect
         }
     })
 
