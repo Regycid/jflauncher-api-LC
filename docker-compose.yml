@@ -5,6 +5,9 @@ services:
     environment:
       - "TZ=Europe/Paris"
     restart: unless-stopped
+    depends_on:
+      proxy:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:5000/health"]
       interval: 1m30s
@@ -19,6 +22,8 @@ services:
   proxy:
     image: 'jc21/nginx-proxy-manager:2'
     restart: unless-stopped
+    depends_on:
+      - portainer
     ports:
       - '80:80'
       - '443:443'
