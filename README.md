@@ -2,34 +2,26 @@
 
 <p align="center">
   <img src=https://livecampus.fr/wp-content/uploads/2020/09/logo_transparent_background.png width="300" title="hover text">
-</p>
 
-## Description
+  
+##Description
+L'API JFLauncher est utilisée pour partager les versions du modpack Jimmu's Factory sur tous les différents canaux (alpha, beta, release,...)
 
-The JFLauncher api are used to share versions of the modpack Jimmu's Factory on all the diffrent channel (alpha,beta, release,...)
+##Comment utiliser
+Routes
+/channel
+GET : Fournit les noms des différents canaux.
 
-## How to use
+/channel/:name
+GET : Fournit les noms des différentes versions du canal.
 
-### Routes
+/channel/:name/:version
+GET : Fournit les journaux de modifications de la version.
 
-#### /channel
+/channel/:name/:version/download
+GET : Télécharge la version du canal.
 
-GET : give the diffrent channels name
-
-#### /channel/:name
-
-GET : give the different channel versions name
-
-#### /channel/:name/:version
-
-GET : give the changelogs of the version
-
-#### /channel/:name/:version/download
-
-GET : download the channel version
-
-### Header
-
-token : type string : token generated manually and give to the both side inside a .env file
-name : type string : channel name give by the /channel route
-version : type string : version name give by the /channel/:name route
+##En-tête
+token : type string : token généré manuellement et donné aux deux côtés dans un fichier .env.
+name : type string : nom du canal donné par la route /channel.
+version : type string : nom de la version donné par la route /channel/:name.
