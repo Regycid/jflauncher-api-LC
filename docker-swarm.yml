@@ -2,7 +2,10 @@ services:
   api:
     image: dragonir/jfl-api:v1.0.2
     environment:
-      - "TZ=Europe/Paris"
+      TZ: Europe/Paris
+      TOKEN_FILE: /run/secrets/jfl-api-token
+    secrets:
+      - jfl-api-token
     deploy:
       mode: replicated
       replicas: 2
@@ -72,3 +75,7 @@ volumes:
   portainer_data:
   proxy-data:
   proxy-certs:
+
+secrets:
+  jfl-api-token:
+    file: ./secrets/jfl-api-token.txt
