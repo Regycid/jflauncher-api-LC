@@ -1,6 +1,6 @@
 services:
   api:
-    image: dragonir/jfl-api:1.0.5
+    image: dragonir/jfl-api:v1.0.6
     environment:
       TZ: Europe/Paris
       TOKEN_FILE: /run/secrets/jfl-api-token
