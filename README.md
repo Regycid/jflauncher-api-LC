@@ -62,7 +62,13 @@ docker stack deploy -c docker-swarm.yml jflauncher
 
 #### Auto scale
 
-Un script python est fourni pour mettre en place un auto scale de l'API JFLauncher. Pour ce faire, exécutez la commande suivante :
+Un script python est fourni pour mettre en place un auto scale de l'API JFLauncher. Pour ce faire, assurez vous d'avoir la librarie docker :
+
+```bash
+pip3 install docker
+```
+
+et exécutez la commande suivante :
 
 ```bash
 python3 autoscale.py
